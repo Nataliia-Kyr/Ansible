@@ -1,0 +1,21 @@
+---
+- hosts: ec2-54-190-197-59.us-west-2.compute.amazonaws.com
+  remote_user: ubuntu
+#  become: yes
+#  become_user: root
+#  become_method: sudo
+
+  tasks:
+    - name: Copying the file gitpush.sh
+      copy:
+        src: /home/ubuntu/tasks/gitpush.sh
+        dest: /home/ubuntu/gitpush.sh
+        mode: ugo+x
+
+    - name: Git push
+      cron:
+        name: "git push once a minute"
+        minute: "*"
+        job: "/home/ubuntu/gitpush.sh > /dev/null 2>&1"
+
+...

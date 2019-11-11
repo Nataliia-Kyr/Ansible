@@ -1,0 +1,20 @@
+---
+- hosts: all
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  become_method: sudo
+
+  tasks:
+  - name: Seting Python
+    apt:
+      pkg:
+      - python-pip
+      - python-dev
+      - libmysqlclient-dev
+
+  - name: Seting MySQLClient
+    pip:
+     name: mysqlclient
+
+...

@@ -1,0 +1,32 @@
+---
+- hosts: all
+  remote_user: ubuntu
+#  become: yes
+#  become_user: root
+#  become_method: sudo
+
+  tasks:
+  - openssh_keypair:
+      path: /home/ubuntu/.ssh/id_rsa
+      size: 4096
+      type: rsa
+      comment: "floresnatalie.work@gmail.com"
+
+  - name: Read SSH public key.
+    shell: cat /home/ubuntu/.ssh/id_rsa.pub
+    register: ssh_public_key
+
+  - name: Add SSH key to username/repository.
+    uri:
+      url: https://api.github.com/user/keys
+      method: POST
+      status_code: 201
+      body:
+        read_only: true
+        key: "{{ ssh_public_key.stdout }}"
+      body_format: json
+      headers:
+        Content-Type: application/json
+        Authorization: token f112781e19b0287a904aca5e1025ff4bc6b515a8
+
+...

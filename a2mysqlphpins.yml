@@ -1,0 +1,44 @@
+---
+- hosts: all
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  become_method: sudo
+
+  tasks:
+
+    - name: Install Apache
+      apt:
+        pkg:
+        - apache2
+        - apache2-doc
+        - php
+        - libapache2-mod-php
+        - php-pear
+
+    - name: Install MySQL
+      apt:
+        pkg:
+        - mysql-server
+        - mysql-client
+        - php-mysql
+
+    - name: Install PHP
+      apt:
+        pkg:
+        - php-curl
+        - php-gd
+        - php-imagick
+        - php-ldap
+        - php-imap
+        - php-memcache
+        - php-mysql
+        - php-ps
+        - php-pspell
+        - php-tidy
+        - imagemagick
+        - php-xdebug
+        - php-xmlrpc
+        - php-xsl
+
+...

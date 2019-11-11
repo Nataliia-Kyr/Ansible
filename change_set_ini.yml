@@ -1,0 +1,61 @@
+---
+- hosts: all
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  become_method: sudo
+
+  tasks:
+
+    - name: Changing max_execution_time in php.ini
+      ini_file:
+        path: /etc/php/7.2/apache2/php.ini
+        section: PHP
+        option: max_execution_time
+        value: 60
+
+    - name: Changing max_input_time in php.ini
+      ini_file:
+        path: /etc/php/7.2/apache2/php.ini
+        section: PHP
+        option: max_input_time
+        value: 90
+
+    - name: Changing post_max_size in php.ini
+      ini_file:
+        path: /etc/php/7.2/apache2/php.ini
+        section: PHP
+        option: post_max_size
+        value: 128M
+
+    - name: Changing upload_max_filesize in php.ini
+      ini_file:
+        path: /etc/php/7.2/apache2/php.ini
+        section: PHP
+        option: upload_max_filesize
+        value: 64M
+
+    - name: Changing max_file_uploads in php.ini
+      ini_file:
+        path: /etc/php/7.2/apache2/php.ini
+        section: PHP
+        option: max_file_uploads
+        value: 50
+
+    - name: Changing memory_limit in php.ini
+      ini_file:
+        path: /etc/php/7.2/apache2/php.ini
+        section: PHP
+        option: memory_limit
+        value: 128M
+
+    - name: Changing output_buffering in php.ini
+      ini_file:
+        path: /etc/php/7.2/apache2/php.ini
+        section: PHP
+        option: output_buffering
+        value: 512
+
+...
+
+

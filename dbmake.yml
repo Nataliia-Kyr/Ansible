@@ -1,0 +1,19 @@
+---
+- hosts: all
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  become_method: sudo
+
+  tasks:
+    - name: Creating user
+      mysql_user:
+        name: db_user
+        password: 123456
+        priv: '*.*:ALL'
+        state: present
+
+    - name: Creating a new database with name 'db_local'
+      mysql_db:
+        name: db_local
+        state: present

@@ -1,0 +1,20 @@
+---
+- hosts: all
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  become_method: sudo
+
+  tasks:
+    - name: Copying the file addsite.sh
+      copy:
+        src: /home/ubuntu/tasks/addsite.sh
+        dest: /home/ubuntu/addsite.sh
+        mode: ugo+x
+
+    - name: Adding site
+      shell: /home/ubuntu/addsite.sh $HOSTNAME
+      args:
+        executable: /bin/bash
+
+...

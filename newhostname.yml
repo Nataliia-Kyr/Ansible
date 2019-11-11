@@ -1,0 +1,26 @@
+---
+   - hosts: ec2-54-190-197-59.us-west-2.compute.amazonaws.com
+     remote_user: ubuntu
+     become: yes
+     become_user: root
+     become_method: sudo
+
+     tasks:
+     - name: makedomain1
+       shell: hostnamectl set-hostname ec2-54-190-197-59.us-west-2.compute.amazonaws.com
+       args:
+         executable: /bin/bash
+
+   - hosts: ec2-54-189-129-205.us-west-2.compute.amazonaws.com
+     remote_user: ubuntu
+     become: yes
+     become_user: root
+     become_method: sudo
+
+     tasks:
+     - name: makedomain2
+       shell: hostnamectl set-hostname ec2-54-189-129-205.us-west-2.compute.amazonaws.com
+       args:
+         executable: /bin/bash
+
+...
